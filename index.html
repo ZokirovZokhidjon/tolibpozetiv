@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Толибжон Исроиловнинг сахифаси</title>
+    <style>
+        body {
+            background-image: url('phone.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            color: white;
+            font-family: 'Georgia', serif;
+        }
+
+        .welcome {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .welcome h1 {
+            text-shadow: 3px 5px 8px #000;
+            color: gold;
+            margin-bottom: 20px;
+        }
+
+        .welcome img {
+            border-radius: 50%;
+            border: 4px solid gold;
+            box-shadow: 0 0 15px rgba(0,0,0,0.3);
+        }
+
+        .btn {
+            text-align: center;
+            background: rgba(0,0,0,0.4);
+            padding: 15px 25px;
+            margin: 20px;
+            border-radius: 10px;
+            max-width: 80%;
+        }
+
+        .home {
+            margin-top: 10px;
+            background: rgba(0,0,0,0.5);
+            padding: 20px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .home a {
+            color: gold;
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+        select {
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="welcome">
+        <h1>Толибжон Исроиловнинг саҳифасига хуш келибсиз!</h1>
+        <img src="logo.jpg" alt="Толибжон Исроилов" width="200" height="200">
+    </div>
+
+    <footer class="btn">
+        <p style="font-size: 19px; margin: 0;">
+            Suhandon va xonanda Tolibjon Isroilovning rasmiy kanaliga xush kelibsiz! <br>
+            Биз <b>#позитив</b> томонидамиз!
+        </p>
+    </footer>
+
+    <div class="home">
+        <a href="index.html">Асосий саҳифа</a>
+        <select id="mGenre" onchange="window.location.href=this.value;">
+            <option value="#">Бўлимни танланг...</option>
+            <option value="poetry.html">Шеърият гулшани</option>
+            <option value="shows.html">Қизиқарли кўрсатувлар</option>
+            <option value="gallery.html">Галерея</option>
+            <option value="https://t.me/Tolibjon_Isroilov">Телеграм канал</option>
+            <option value="about.html">Автор хақида</option> 
+        </select>
+    </div>
+
+</body>
+</html>

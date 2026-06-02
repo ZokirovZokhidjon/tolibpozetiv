@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Шеърият гулшани</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; display: flex; flex-direction: column; background: #f4f4f4; margin: 0; }
+        header { background: #333; color: gold; padding: 20px; text-align: center; }
+        .container { display: flex; padding: 20px; gap: 20px; }
+        
+        /* Асосий матн қисми */
+        .main-content { flex: 3; background: white; padding: 30px; border-radius: 10px; min-height: 400px; }
+        
+        /* Ўнг томондаги рўйхат */
+        .sidebar { flex: 1; background: #fff; padding: 20px; border-radius: 10px; }
+        .sidebar h3 { border-bottom: 2px solid gold; }
+        .poem-link { cursor: pointer; color: #007bff; margin: 10px 0; display: block; }
+        .poem-link:hover { text-decoration: underline; }
+
+        pre { white-space: pre-wrap; font-family: 'Georgia', serif; font-size: 18px; line-height: 1.6; }
+        .main-content img{
+            border-radius: 150px;
+            border-color: gold;
+            border-style: solid;
+            box-shadow: 3px 5px 8px;
+        }
+    </style>
+</head>
+<body>
+    <!--
+    https://catbox.moe/#
+    -->
+
+<header>
+    <h1>Толибжон Исроилов — Шеърият гулшани</h1>
+    <a href="index.html" style="color: white;">Бош саҳифага қайтиш</a>
+</header>
+
+<div class="container">
+    <!-- Асосий матн чиқадиган жой -->
+    <div class="main-content" id="viewer">
+        <h2>Хуш келибсиз!</h2>
+        <img src="logo.jpg" alt="log" width="200" height="200">
+        <p>Илтимос, ўнг томондан шеърни танланг.</p>
+    </div>
+
+    <!-- Ўнг томондаги қисқача рўйхат -->
+    <div class="sidebar">
+        <h3>Шеърлар рўйхати</h3>
+        <div id="links">
+            <span class="poem-link" onclick="showPoem(1)">Шеър номи 1</span>
+            <span class="poem-link" onclick="showPoem(2)">Шеър номи 2</span>
+               <span class="poem-link" onclick="showPoem(3)">Шеър номи 3</span>
+                  <span class="poem-link" onclick="showPoem(4)">Шеър номи 4</span>
+                  <span class="poem-link" onclick="showPoem(5)">Шеър номи 5</span>
+            <!-- ШУ ЕРГА ЯНГИ ШЕЪРЛАРНИ ҚЎШАСИЗ -->
+        </div>
+    </div>
+</div>
+
+<script>
+    // Шеърлар базаси (Шу ерга шеърларингизни киритасиз)
+  // Шеърлар базасига энди audio ҳам қўшамиз
+    
+const poems = {
+    1: { 
+        title: "Биринчи шеър", 
+        body: "02 Билиб билмай",
+        audio: "https://files.catbox.moe/e8oecg.mp3" 
+    }, // Вергул бор
+    2: { 
+        title: "58 navoyini uqimay quysa", 
+        body: "58 navoyini uqimay quysa", 
+        audio: "https://files.catbox.moe/bkjkoz.mp3" 
+    }, // Вергул бор
+    3: { 
+        title: "103 BOLALIK 1", 
+        body: "103 BOLALIK 1", 
+        audio: "https://files.catbox.moe/2h39sa.mp3" 
+    }, // МАНА ШУ ЕРГА ВЕРГУЛ ҚЎЙДИК!
+    4: { 
+        title: "2_5271480354727819712", 
+        body: "2_5271480354727819712", 
+        audio: "https://files.catbox.moe/su6fu8.mp3" // Google Drive ўрнига Catbox линкини қўйинг
+    },
+    // МАНА ШУ ЕРГА ВЕРГУЛ ҚЎЙДИК!
+    5: { 
+        title: "111 Qaerda bo'lsangiz", 
+        body: "111 Qaerda bo'lsangiz", 
+        audio: "https://files.catbox.moe/3npf6z.mp3" // Google Drive ўрнига Catbox линкини қўйинг
+    }
+};
+
+function showPoem(id) {
+        const viewer = document.getElementById('viewer');
+        const poem = poems[id];
+        
+        // Аудио плеерни ҳосил қилиш
+        let audioHTML = '';
+        if (poem.audio) {
+            audioHTML = `
+                <div style="margin-top: 20px;">
+                    <p>Шеърни тинглаш:</p>
+                    <audio controls>
+                        <source src="${poem.audio}" type="audio/mpeg">
+                        Сизнинг браузерингиз аудиони қўллаб-қувватламайди.
+                    </audio>
+                </div>
+            `;
+        }
+
+        // Матн ва аудиони бирлаштириш
+        viewer.innerHTML = `<h2>${poem.title}</h2><pre>${poem.body}</pre>${audioHTML}`;
+    }
+
+  
+</script>
+
+</body>
+</html>
