@@ -2,73 +2,76 @@
 <html lang="uz">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Фотогалерея</title>
     <style>
-        body { background-color: cadetblue; font-family: sans-serif; margin: 0; }
-        .container { max-width: 900px; margin: auto; padding: 20px; text-align: center; }
-        .container a{
-            text-align: center;
-            text-decoration: solid;
-            font-family: Georgia, 'Times New Roman', Times, serif;
-            font-size: 18px;
-            color: gold;
+        body { background-color: cadetblue; font-family: sans-serif; margin: 0; padding: 10px; }
+        .container { max-width: 900px; margin: auto; text-align: center; }
+        
+        .nav-link { 
+            display: inline-block; margin-bottom: 20px; color: gold; 
+            font-family: Georgia, serif; font-size: 18px; text-decoration: none; 
         }
-        .container a:hover{
-            color: white;
-            text-shadow: 3px 5px 8px;
-        }
+        .nav-link:hover { color: white; text-shadow: 2px 2px 5px black; }
+
         h1 { font-family: Georgia, serif; font-size: 32px; color: gold; margin-bottom: 30px; }
 
-        /* Карусельни марказга қўйиш */
+        /* Карусель (Мобил мослашув билан) */
         .carousel { 
-            width: 400px; height: 500px; overflow: hidden; 
+            width: 100%; max-width: 400px; height: 300px; overflow: hidden; 
             border-radius: 15px; box-shadow: 0 10px 20px rgba(0,0,0,0.3); 
-            margin: 0 auto 50px auto; /* МАРКАЗГА ҚЎЙДИК */
-            border: 4px solid white;
+            margin: 0 auto 30px auto; border: 4px solid white;
         }
         .carousel img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
 
         /* Галерея сеткаси */
-        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
-        .gallery-item { cursor: pointer; width: 100%; height: 200px; object-fit: cover; border-radius: 8px; transition: 0.3s; border: 2px solid #fff; }
-        .gallery-item:hover { transform: scale(1.05); box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
+        .gallery-item { 
+            cursor: pointer; width: 100%; height: 150px; object-fit: cover; 
+            border-radius: 8px; transition: 0.3s; border: 2px solid #fff; 
+        }
+        .gallery-item:hover { transform: scale(1.03); }
 
         /* Modal */
-        #modal { display: none; position: fixed; z-index: 10; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); }
-        #modal img { max-width: 80%; max-height: 80%; margin: 5% auto; display: block; border: 5px solid white; border-radius: 10px; cursor: pointer; }
+        #modal { display: none; position: fixed; z-index: 100; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); }
+        #modal img { max-width: 90%; max-height: 80%; margin: 10% auto; display: block; border: 4px solid white; border-radius: 10px; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <a href="index.html">Асосий сахифа</a>
+    <a href="index.html" class="nav-link">← Асосий саҳифа</a>
     <h1>Фотогалерея</h1>
     
     <div class="carousel">
-        <img id="carousel-img" src="ph.jpg">
+        <img id="carousel-img" src="ph.jpg" alt="Gallery Image">
     </div>
 
     <div class="gallery-grid" id="gallery"></div>
 </div>
 
 <div id="modal" onclick="this.style.display='none'">
-    <img id="modal-img">
+    <img id="modal-img" src="" alt="Zoomed Image">
 </div>
 
 <script>
-    const images = ["ph.jpg", "ph2.jpg", "ph3.jpg", "phone.jpg", "logo.jpg"];
+    // Расмлар рўйхати (Файл номлари аниқ бўлиши шарт: .jpg ёки .png)
+    const images = ["ph.jpg", "ph2.jpg", "ph3.jpg","ph6.jpg","ph7.jpeg", "phone8.jpg","ph10.jpeg", "449558_big.jpg"];
     
     // Карусель мантиқи
     let index = 0;
     const carouselImg = document.getElementById('carousel-img');
-    setInterval(() => {
-        carouselImg.style.opacity = 0; // Хиралашиш эффекти
+    
+    function changeImage() {
+        carouselImg.style.opacity = 0;
         setTimeout(() => {
             index = (index + 1) % images.length;
             carouselImg.src = images[index];
             carouselImg.style.opacity = 1;
         }, 500);
-    }, 3000);
+    }
+    
+    setInterval(changeImage, 3000);
 
     // Галереяни яратиш
     const gallery = document.getElementById('gallery');
@@ -78,7 +81,9 @@
     images.forEach(src => {
         const img = document.createElement('img');
         img.src = src;
+        img.alt = "Image";
         img.className = 'gallery-item';
+        img.onerror = function() { this.style.display='none'; }; // Агар расм топилмаса, уни яшириш
         img.onclick = () => {
             modal.style.display = 'block';
             modalImg.src = src;
